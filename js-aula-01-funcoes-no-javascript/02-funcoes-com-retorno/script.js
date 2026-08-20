@@ -12,7 +12,7 @@ document.write(
   `<p>A multiplicação de ${n1} por ${n2} é igual a <strong> ${multiplicar(n1, n2)}</strong>.`,
 );
 
-// Funções com mais de um retorno
+// Funções com mais de um retorno...................
 const number = 4;
 
 function parImpar(number) {
