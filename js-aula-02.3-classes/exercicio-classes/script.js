@@ -23,23 +23,20 @@ class Heroi {
 // Instanciando objetos representando os heróis
 const homemAranha = new Heroi('Homem-Aranha', 300, 100, 400);
 homemAranha.teia = 1;
-homemAranha.sentidoAranha() = () => {
+homemAranha.sentidoAranha = () => {
     return `Detectando perigo!`
 }
 
 const superman = new Heroi('Superman', 1500, 1800, 2000);
 superman.podeVoar = 1;
-superman.visaoCalor() = () => {
+superman.visaoCalor = () => {
     return `Usando visão de calor!`;
 }
 
 const batman = new Heroi('Batman', 500, 400, 250);
 batman.esconder = 1;
-batman.investigar() = () => {
+batman.investigar = () => {
     return `Investigando um crime do Coringa!`;
 }
 
-document.write(`
-    O ${homemAranha.nome} está em ação! Ele está ${homemAranha.correr()}, e ele encontra o 
-    Dr. Octopus! ${homemAranha.atacar()}
-    `);
+document.writeln(`<p>O ${homemAranha.nome} está em ação! Ele está ${homemAranha.correr()}, e ele encontra o Dr. Octopus! ${homemAranha.atacar()}</p>`);
