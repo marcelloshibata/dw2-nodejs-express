@@ -39,4 +39,11 @@ batman.investigar = () => {
     return `Investigando um crime do Coringa!`;
 }
 
-document.writeln(`<p>O ${homemAranha.nome} está em ação! Ele está ${homemAranha.correr()}, e ele encontra o Dr. Octopus! ${homemAranha.atacar()}</p>`);
+document.writeln(`<p>O ${homemAranha.nome} está em ação! Ele está 
+  ${homemAranha.correr()} km/h, e ${homemAranha.sentidoAranha()} Ele encontra o Dr. Octopus! ${homemAranha.atacar()}</p>`);
+
+document.writeln(`<p>O ${superman.nome} está aqui! Ele está 
+  ${superman.correr()} km/h, e ele encontra o Lex Luthor! ${superman.visaoCalor()}</p>`);
+
+document.writeln(`<p>O ${batman.nome} está em ação! Ele está 
+  ${batman.correr()} km/h, e está ${batman.investigar()} Então, ele encontra o Coringa, ${batman.atacar()}</p>`);
