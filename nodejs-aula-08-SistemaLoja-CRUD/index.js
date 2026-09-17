@@ -1,5 +1,7 @@
 // Importando o Express
 import express from "express";
+// Importando arquivo de conexão do Sequelize
+import connection from "./config/sequelize-config.js";
 // Iniciando o Express
 const app = express();
 
@@ -12,14 +14,23 @@ app.set("view engine", "ejs");
 // Define o uso da pasta "public" para uso de arquivos estáticos
 app.use(express.static("public"));
 
-app.use("/", PedidoController);
-app.use("/", ProdutoController);
-app.use("/", ClienteController);
+// Relizando a conexão com o banco de dados
+connection.authenticate().then(() => {
+  // Sucesso na promessa:
+  console.log("Conexão com o banco de dados realizada com sucesso!")
+  // Falha na promessa
+}).catch((error) => {
+  console.log(`Ocorreu um erro ao se conectar ao banco de dados. Erro: ${error}`)
+});
 
 // ROTA PRINCIPAL
 app.get("/", function (req, res) {
   res.render("index");
 });
+
+app.use("/", PedidoController);
+app.use("/", ProdutoController);
+app.use("/", ClienteController);
 
 // INICIA O SERVIDOR NA PORTA 8080
 const port = 8080;
