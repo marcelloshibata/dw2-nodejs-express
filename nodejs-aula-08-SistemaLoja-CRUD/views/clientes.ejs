@@ -1,6 +1,42 @@
 <%- include ('partials/header.ejs') %>
     <%- include ('partials/navbar.ejs') %>
 
+        <!-- Formulário de cadastro de clientes -->
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Cadastrar cliente</h1>
+                </div>
+                <div class="card-body">
+                    <!-- Action: para onde os dados serão enviados -->
+                     <!-- O método "POST": Método HTTP que envia dados de forma oculta -->
+                    <form action="/clientes/cadastrar" method="POST">
+                        <label for="nome">Nome do cliente:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Insira o nome do cliente"
+                        class="form-control" required>
+
+                        <label for="cpf">CPF do cliente:</label>
+                        <input type="text" id="cpf" name="cpf"
+                        placeholder="Insira o CPF do cliente" class="form-control" required>
+
+                        <label for="endereco">Endereço do cliente:</label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Insira o endereço do cliente"
+                        class="form-control" required>
+                        <br>
+
+                        <!-- Botão de cadastrar -->
+                        <button type="submit"
+                        class="btn btn-success">Cadastrar</button>
+                        <!-- Botão de limpar -->
+                        <button type="reset"
+                        class="btn btn-danger">Limpar</button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <div class="container">
             <div class="card">
                 <div class="card-header">

@@ -14,6 +14,9 @@ import Cliente from "./model/Cliente.js";
 import Pedido from "./model/Pedido.js";
 import Produto from "./model/Produto.js";
 
+// Configurando o express para permitir dados através de formulários
+app.use(express.urlencoded({extended: false}))
+
 // Define o EJS como Renderizador de páginas
 app.set("view engine", "ejs");
 // Define o uso da pasta "public" para uso de arquivos estáticos
