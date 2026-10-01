@@ -50,20 +50,24 @@
                                 <th>Nome:</th>
                                 <th>CPF:</th>
                                 <th>Endereço:</th>
+                                <!-- Nova coluna de ações -->
+                                <th style="text-align: center;" colspan="2">Ações:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% clientes.forEach(cliente=> { %>
                                 <tr>
                                     <td><img src="imgs/avatar.png" width="30px"></td>
+                                    <td><%= cliente.nome %></td>
+                                    <td><%= cliente.cpf %></td>
+                                    <td><%= cliente.endereco %></td>
+                                    <!-- Botão de editar -->
                                     <td>
-                                        <%= cliente.nome %>
+                                        <a href="/clientes/editar/<%= cliente.id %>" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <%= cliente.cpf %>
-                                    </td>
-                                    <td>
-                                        <%= cliente.endereco %>
+                                        <a href="/clientes/excluir/<%= cliente.id %>" class="btn btn-danger"
+                                            onclick="return confirm('Deseja mesmo excluir o cliente <%= cliente.nome %>?')">Excluir</a>
                                     </td>
                                 </tr>
                                 <% }) %>
