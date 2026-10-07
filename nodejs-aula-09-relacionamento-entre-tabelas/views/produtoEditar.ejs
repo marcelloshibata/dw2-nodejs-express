@@ -1,0 +1,36 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Editar Produto</h1>
+            <hr>
+        </div>
+        <div class="card-body">
+            <form action="/produtos/alterar" method="post">
+                <label for="nome">Nome do Produto:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Insira o nome do Produto"
+                        class="form-control" required value="<%= produto.nome %>">
+
+                        <label for="preco">Preço do Produto:</label>
+                        <input type="text" id="preco" name="preco"
+                        placeholder="Insira o valor do produto" class="form-control" required value="<%= produto.preco %>">
+
+                        <label for="categoria">Categoria do Produto:</label>
+                        <input type="text" id="categoria" name="categoria"
+                        placeholder="Insira a categoria do produto" class="form-control" required value="<%= produto.categoria %>">
+                        <br>
+                <!-- Campo invisível com a id do cliente -->
+                <input type="hidden" name="id" id="id" value="<%= produto.id %>">
+                <button type="submit" class="btn btn-warning" 
+                onclick="return confirm('Deseja mesmo alterar o produto <%= produto.nome %>?')">Alterar</button>
+                <a href="/produtos">
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/footer.ejs') %>
