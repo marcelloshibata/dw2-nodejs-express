@@ -2,6 +2,10 @@
 import express from "express";
 // Importando arquivo de conexão do Sequelize
 import connection from "./config/sequelize-config.js";
+
+// Importando o express-session
+import session from "express-session";
+
 // Iniciando o Express
 const app = express();
 
@@ -16,6 +20,19 @@ import Pedido from "./model/Pedido.js";
 import Produto from "./model/Produto.js";
 // Importando as ASSOCIAÇÕES
 import defineAssociations from "./config/associations.js";
+
+import Auth from "./middleware/Auth.js";
+
+
+// Configurando a sessão do usuário
+app.use(session({
+  secret: "segredoloja",
+  cookie: {
+    maxAge: 3600000 // Sessão expira em 1 hora (ms)
+  },
+  saveUninitialized: false,
+  resave: false
+}));
 
 // Configurando o express para permitir dados através de formulários
 app.use(express.urlencoded({extended: false}))
@@ -62,7 +79,7 @@ Promise.all([
 })
 
 // ROTA PRINCIPAL
-app.get("/", function (req, res) {
+app.get("/", Auth, (req, res) => {
   res.render("index");
 });
 

@@ -1,11 +1,13 @@
 import express from "express";
 // Importando o model
 import Cliente from "../model/Cliente.js";
+// Importando o middleware de autenticação
+import Auth from "../middleware/Auth.js";
 
 const rota = express.Router();
 
 // ROTA CLIENTES
-rota.get("/clientes", function (req, res) {
+rota.get("/clientes", Auth,(req, res) => {
   // Selecionando todos os clientes do banco de dados
   Cliente.findAll()
     .then((clientes) => {
@@ -20,7 +22,7 @@ rota.get("/clientes", function (req, res) {
 });
 
 // Rota de cadastro de clientes
-rota.post("/clientes/cadastrar", (req, res) => {
+rota.post("/clientes/cadastrar", Auth, (req, res) => {
   // Capturando os dados vindo do formulário e gravando as variáveis
   const nome = req.body.nome;
   const cpf = req.body.cpf;
@@ -44,7 +46,7 @@ rota.post("/clientes/cadastrar", (req, res) => {
 
 // Rota para excluir um cliente
 // :id -> cria um parâmetro na rota
-rota.get("/clientes/excluir/:id", (req, res) => {
+rota.get("/clientes/excluir/:id", Auth, (req, res) => {
   // Criando uma variável para armazenar o parâmetro que chega pela URL
   const id = req.params.id;
   // Chamando o model e pedindo para excluir
@@ -64,7 +66,7 @@ rota.get("/clientes/excluir/:id", (req, res) => {
 });
 
 // Rota de edição de cliente
-rota.get("/clientes/editar/:id", (req, res) => {
+rota.get("/clientes/editar/:id", Auth, (req, res) => {
   // Coletando o parâmetro da URL
   const id = req.params.id;
   // Buscando o cliente no banco pelo ID
@@ -81,7 +83,7 @@ rota.get("/clientes/editar/:id", (req, res) => {
 });
 
 // Rota que altera um cliente no banco de dados
-rota.post("/clientes/alterar/", (req, res) => {
+rota.post("/clientes/alterar/", Auth, (req, res) => {
   // Coletando os dados do formulário
   const id = req.body.id;
   const nome = req.body.nome;

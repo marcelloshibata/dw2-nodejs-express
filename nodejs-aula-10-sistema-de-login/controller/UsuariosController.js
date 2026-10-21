@@ -7,7 +7,9 @@ import Usuario from "../model/Usuario.js";
 
 // Rota de LOGIN
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {
+    loggedOut: true,
+  });
 });
 
 // ROTA DE AUTENTICAÇÃO
@@ -24,6 +26,16 @@ router.post("/autenticar", (req, res) => {
         const senhaCorreta = bcrypt.compareSync(password, usuario.password)
         // Se a senha for VÁLIDA
         if (senhaCorreta) {
+            // Autoriza o login e cria uma sessão para o usuário
+            req.session.user = {
+              id: usuario.id,
+              email: usuario.email,
+            }
+
+            // TESTANDO A SESSÃO:
+            // res.send(`Usuário logado: <br> ID: ${req.session.user['id']} 
+            //   <br> E-mail: ${req.session.user['email']}`);
+
             res.redirect("/");
         // Se a senha for INVÁLIDA
         } else {
@@ -38,9 +50,19 @@ router.post("/autenticar", (req, res) => {
   })
 });
 
+// ROTA DE LOGOUT
+router.get("/logout", (req, res) => {
+  // Limpa a sessão
+  req.session.user = undefined;
+  // Redireciona para a home
+  res.redirect("/");
+})
+
 // ROTA DE CADASTRO
 router.get("/cadastro", (req, res) => {
-  res.render("cadastro");
+  res.render("cadastro", {
+    loggedOut: true,
+  });
 });
 
 router.post("/cadastro/novo", (req, res) => {

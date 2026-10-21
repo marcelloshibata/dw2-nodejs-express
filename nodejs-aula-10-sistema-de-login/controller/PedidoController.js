@@ -2,11 +2,12 @@ import express from "express";
 import Pedido from "../model/Pedido.js";
 // Importando o Model de Cliente
 import Cliente from "../model/Cliente.js";
+import Auth from "../middleware/Auth.js";
 
 const rota = express.Router();
 
 // ROTA PEDIDOS
-rota.get("/pedidos", function (req, res) {
+rota.get("/pedidos", Auth, (req, res) => {
   // Listando todos os pedidos
   Promise.all([
       Pedido.findAll({
@@ -33,7 +34,7 @@ rota.get("/pedidos", function (req, res) {
     });
 });
 
-rota.post("/pedidos/cadastrar", (req, res) => {
+rota.post("/pedidos/cadastrar", Auth, (req, res) => {
   // Capturando os dados vindo do formulário e gravando as variáveis
   const numero = req.body.numero;
   const valor = req.body.valor;
@@ -55,7 +56,7 @@ rota.post("/pedidos/cadastrar", (req, res) => {
     });
 });
 
-rota.get("/pedidos/excluir/:id", (req, res) => {
+rota.get("/pedidos/excluir/:id", Auth, (req, res) => {
   const id = req.params.id;
 
   Pedido.destroy({
@@ -71,7 +72,7 @@ rota.get("/pedidos/excluir/:id", (req, res) => {
     });
 });
 
-rota.get("/pedidos/editar/:id", (req, res) => {
+rota.get("/pedidos/editar/:id", Auth, (req, res) => {
   const id = req.params.id;
 
   Pedido.findByPk(id)
@@ -87,7 +88,7 @@ rota.get("/pedidos/editar/:id", (req, res) => {
     });
 });
 
-rota.post("/pedidos/alterar/", (req, res) => {
+rota.post("/pedidos/alterar/", Auth, (req, res) => {
   const id = req.body.id;
   const numero = req.body.num;
   const valor = req.body.valor;

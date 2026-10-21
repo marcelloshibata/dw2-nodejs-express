@@ -1,9 +1,11 @@
 import express from "express";
 import Produto from "../model/Produto.js";
+import Auth from "../middleware/Auth.js";
+
 const rota = express.Router();
 
 // ROTA PRODUTOS
-rota.get("/produtos", function (req, res) {
+rota.get("/produtos", Auth, (req, res) => {
   Produto.findAll()
     .then((produtos) => {
       res.render("produtos", {
@@ -16,7 +18,7 @@ rota.get("/produtos", function (req, res) {
 });
 
 // Cadastro
-rota.post("/produtos/cadastrar", (req, res) => {
+rota.post("/produtos/cadastrar", Auth, (req, res) => {
   const nome = req.body.nome;
   const preco = req.body.preco;
   const categoria = req.body.categoria;
@@ -34,7 +36,7 @@ rota.post("/produtos/cadastrar", (req, res) => {
     });
 });
 
-rota.get("/produtos/excluir/:id", (req, res) => {
+rota.get("/produtos/excluir/:id", Auth, (req, res) => {
   const id = req.params.id;
 
   Produto.destroy({ where: { id: id } })
@@ -46,7 +48,7 @@ rota.get("/produtos/excluir/:id", (req, res) => {
     });
 });
 
-rota.get("/produtos/editar/:id", (req, res) => {
+rota.get("/produtos/editar/:id", Auth, (req, res) => {
   const id = req.params.id;
 
   Produto.findByPk(id)
@@ -62,7 +64,7 @@ rota.get("/produtos/editar/:id", (req, res) => {
     });
 });
 
-rota.post("/produtos/alterar/", (req, res) => {
+rota.post("/produtos/alterar/", Auth, (req, res) => {
   const id = req.body.id;
   const nome = req.body.nome;
   const preco = req.body.preco;
